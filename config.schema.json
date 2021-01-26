@@ -1,0 +1,35 @@
+{
+  "title": "bot config",
+  "type": "object",
+  "required": [
+    "token",
+    "db",
+    "owner",
+    "commandPrefix",
+    "corsAllow"
+  ],
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "db": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "owner"
+    },
+    "commandPrefix": {
+      "type": "string"
+    },
+    "corsAllow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
