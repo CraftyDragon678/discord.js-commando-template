@@ -1,0 +1,36 @@
+import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
+import Settings from '@src/models/settingsModel';
+
+export default class PrefixCommand extends Command {
+  constructor(client: CommandoClient) {
+    super(client, {
+      name: 'prefix',
+      aliases: ['접두사설정'],
+      description: 'prefix command',
+      group: 'util',
+      memberName: 'prefix',
+      args: [
+        {
+          key: 'prefix',
+          prompt: '',
+          default: '',
+          type: 'string',
+        },
+      ],
+    });
+  }
+
+  async run(msg: CommandoMessage, { prefix }: { prefix: string }) {
+    if (!msg.guild) return msg.channel.send('서버에서만 사용할 수 있는 명령어입니다.');
+    if (!msg.member?.permissions.has('ADMINISTRATOR')) {
+      return msg.channel.send('서버관리자만 접두사를 변경할 수 있습니다.');
+    }
+    if (!prefix) {
+      return msg.channel.send(`명령어 사용법: \`${msg.guild.commandPrefix}접두사설정 !\``);
+    }
+    const { guild } = msg;
+    guild.commandPrefix = prefix;
+    await Settings.updateOne({ _id: msg.guild.id }, { $set: { prefix } }, { upsert: true });
+    return msg.channel.send(`${prefix}(으)로 접두사를 변경했습니다. \`${prefix}도움\`과 같이 사용하실 수 있습니다.`);
+  }
+}
