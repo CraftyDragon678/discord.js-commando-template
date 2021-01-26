@@ -5,7 +5,7 @@ import {
 import { oneLine } from 'common-tags';
 import config, { owner } from '@/config.json';
 import createServer from '@src/web';
-import Settings from '@src/models/settingsModel';
+import Settings from '@src/models/settingModel';
 import startTask from './tasks';
 
 const client = new CommandoClient({

@@ -1,5 +1,5 @@
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import Settings from '@src/models/settingsModel';
+import Settings from '@src/models/settingModel';
 
 export default class ResetPrefixCommand extends Command {
   constructor(client: CommandoClient) {
