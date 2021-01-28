@@ -26,7 +26,7 @@ const init = async () => {
 
 client.on('error', console.error)
   .on('warn', console.warn)
-  .on('debug', console.log)
+  .on('debug', (m) => !m.toLowerCase().includes('heartbeat') && console.log(m))
   .on('ready', () => {
     console.log(`Client ready; logged in as ${client.user?.username}#${client.user?.discriminator} (${client.user?.id})`);
     init();
